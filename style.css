@@ -1,77 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
+
 body {
-    background-color: #f4f7f6;
+    /* Красивый современный градиент */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding-top: 50px;
-}
-.container {
-    background: white;
+    align-items: center;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
 }
+
+/* Эффект матового стекла (Glassmorphism) */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+}
+
 h1 {
     text-align: center;
-    margin-bottom: 20px;
     color: #333;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
+
+h1 i { color: #764ba2; }
+
 .input-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
+
 input {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: border-color 0.3s;
     outline: none;
 }
-button {
-    padding: 10px 15px;
-    background-color: #28a745;
+
+input:focus { border-color: #764ba2; }
+
+#addBtn {
+    padding: 0 20px;
+    background: #764ba2;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s, transform 0.2s;
 }
-button:hover {
-    background-color: #218838;
-}
-ul {
-    list-style: none;
-}
+
+#addBtn:hover { background: #5a357d; transform: scale(1.05); }
+
+ul { list-style: none; }
+
 li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background: #f9f9f9;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 5px;
-    border-radius: 4px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease forwards;
 }
-li.completed span {
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+li:hover { background: #f1f3f5; transform: translateX(5px); }
+
+li.completed .task-text {
     text-decoration: line-through;
-    color: #888;
+    color: #adb5bd;
 }
-.task-text {
+
+.task-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     cursor: pointer;
     flex: 1;
 }
+
+/* Кастомный чекбокс */
+.task-content input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #764ba2;
+}
+
+.task-text { font-size: 15px; color: #333; transition: color 0.3s; }
+
 .delete-btn {
-    background-color: #dc3545;
-    padding: 5px 10px;
-    font-size: 12px;
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
 }
-.delete-btn:hover {
-    background-color: #c82333;
+
+.delete-btn:hover { background: #ffebeb; }
+
+.empty-state {
+    text-align: center;
+    padding: 30px 0;
+    color: #adb5bd;
+    display: none; /* Скрыто по умолчанию */
 }
+
+.empty-state i { font-size: 40px; margin-bottom: 10px; color: #764ba2; opacity: 0.5; }
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #666;
+}
+
+#clearCompletedBtn {
+    background: none;
+    border: none;
+    color: #764ba2;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+#clearCompletedBtn:hover { color: #dc3545; text-decoration: underline; }
