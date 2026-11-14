@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>To-Do List | Vibe Coder Task</title>
+    <!-- Подключаем иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Мои задачи</h1>
+        <h1><i class="fa-solid fa-list-check"></i> Мои задачи</h1>
+        
         <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Новая задача...">
-            <button id="addBtn">Добавить</button>
+            <input type="text" id="taskInput" placeholder="Что нужно сделать?">
+            <button id="addBtn"><i class="fa-solid fa-plus"></i></button>
         </div>
+
         <ul id="taskList"></ul>
+
+        <!-- Экран, если задач нет -->
+        <div id="emptyState" class="empty-state">
+            <i class="fa-regular fa-face-smile-wink"></i>
+            <p>У вас пока нет задач. Самое время отдохнуть!</p>
+        </div>
+
+        <div class="footer" id="footer">
+            <span id="taskCount">0 задач</span>
+            <button id="clearCompletedBtn">Очистить выполненные</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
