@@ -17,19 +17,37 @@ A small browser-based task tracker used as a practical QA portfolio project.
 
 No build step is required.
 
-## QA scope
-This project is being documented and tested. Planned coverage includes:
-- Functional testing of adding, completing, deleting and clearing tasks
-- Input validation (empty and whitespace-only input)
-- Persistence after page reload
-- Counter and empty-state behavior
-- Keyboard interaction (Enter)
-- Boundary and repeated-action checks
+## QA documentation
+- [Manual test cases](docs/test-cases.md) — 17 initial scenarios
+- [Test execution report](docs/test-execution-report.md) — record results after execution
+- [Bug report template](docs/bug-report-template.md) — standard defect format
 
-## Test documentation
-See [test cases](docs/test-cases.md) for the manual test checklist and cases.
+## Automated tests
+Initial end-to-end tests are written using Playwright:
+- Initial empty state
+- Adding tasks by button and Enter
+- Empty/whitespace input validation
+- Completing tasks and counter update
+- Deleting a task
+- Clearing completed tasks
+- Persistence after reload
+
+### Run tests
+Install dependencies and Chromium:
+```bash
+npm install
+npx playwright install chromium
+npm test
+```
+
+Open the HTML report:
+```bash
+npm run test:report
+```
+
+> Automation has been authored but not yet executed/verified in a local browser. Results should not be described as passing until the suite is run.
 
 ## Tech stack
-HTML, CSS, JavaScript, browser localStorage.
+HTML, CSS, JavaScript, localStorage, Playwright.
 
-> Portfolio practice project. Test documentation and automation will be added incrementally; no automated test suite is claimed yet.
+Portfolio practice project; it is not presented as a commercial client delivery.
