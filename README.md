@@ -30,7 +30,7 @@ Playwright scenarios cover:
 | Clear completed | Completed items removed, active items preserved |
 | Persistence | Task survives page reload |
 
-**8 end-to-end scenarios** are currently authored in tests/todo.spec.js. The test suite has not been confirmed passing in a local browser; check the Actions tab for CI status before claiming successful execution.
+**8 end-to-end scenarios** are currently authored in `tests/todo.spec.js`. A GitHub Actions Playwright run on 20 November 2026 completed successfully on `main`: [view the successful run](https://github.com/blvxx/playwright-qa-lab/actions/runs/44837577569). This confirms that CI run; it is not a claim about a separate local execution.
 
 ## Manual QA documentation
 
@@ -59,5 +59,7 @@ npm run test:report
 JavaScript · HTML · CSS · localStorage · Playwright · GitHub Actions
 
 ## Project status
+
+The latest linked Playwright CI run completed successfully. Check the [Actions history](https://github.com/blvxx/playwright-qa-lab/actions) for subsequent runs and current status.
 
 Independent portfolio practice project. It is not a commercial client delivery.
