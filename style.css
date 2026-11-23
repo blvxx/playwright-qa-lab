@@ -8,7 +8,6 @@
 }
 
 body {
-    /* Красивый современный градиент */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
@@ -17,12 +16,11 @@ body {
     padding: 20px;
 }
 
-/* Эффект матового стекла (Glassmorphism) */
 .container {
     background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 450px;
     backdrop-filter: blur(10px);
@@ -48,8 +46,9 @@ h1 i { color: #764ba2; }
     margin-bottom: 25px;
 }
 
-input {
+.input-group input {
     flex: 1;
+    min-width: 0;
     padding: 14px;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
@@ -58,9 +57,10 @@ input {
     outline: none;
 }
 
-input:focus { border-color: #764ba2; }
+.input-group input:focus { border-color: #764ba2; }
 
 #addBtn {
+    flex: 0 0 auto;
     padding: 0 20px;
     background: #764ba2;
     color: white;
@@ -73,17 +73,24 @@ input:focus { border-color: #764ba2; }
 
 #addBtn:hover { background: #5a357d; transform: scale(1.05); }
 
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #172554;
+    outline-offset: 3px;
+}
+
 ul { list-style: none; }
 
 li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
     padding: 15px;
     background: #f8f9fa;
     border-radius: 12px;
     margin-bottom: 10px;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease;
     animation: fadeIn 0.3s ease forwards;
 }
 
@@ -92,7 +99,7 @@ li {
     to { opacity: 1; transform: translateY(0); }
 }
 
-li:hover { background: #f1f3f5; transform: translateX(5px); }
+li:hover { background: #f1f3f5; }
 
 li.completed .task-text {
     text-decoration: line-through;
@@ -105,17 +112,23 @@ li.completed .task-text {
     gap: 12px;
     cursor: pointer;
     flex: 1;
+    min-width: 0;
 }
 
-/* Кастомный чекбокс */
 .task-content input[type="checkbox"] {
     width: 20px;
     height: 20px;
+    flex: 0 0 auto;
     cursor: pointer;
     accent-color: #764ba2;
 }
 
-.task-text { font-size: 15px; color: #333; transition: color 0.3s; }
+.task-text {
+    font-size: 15px;
+    color: #333;
+    transition: color 0.3s;
+    overflow-wrap: anywhere;
+}
 
 .delete-btn {
     background: transparent;
@@ -125,6 +138,7 @@ li.completed .task-text {
     font-size: 16px;
     padding: 8px;
     border-radius: 8px;
+    flex: 0 0 auto;
     transition: background 0.2s;
 }
 
@@ -134,15 +148,20 @@ li.completed .task-text {
     text-align: center;
     padding: 30px 0;
     color: #adb5bd;
-    display: none; /* Скрыто по умолчанию */
 }
 
-.empty-state i { font-size: 40px; margin-bottom: 10px; color: #764ba2; opacity: 0.5; }
+.empty-state i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #764ba2;
+    opacity: 0.5;
+}
 
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #e0e0e0;
@@ -150,13 +169,31 @@ li.completed .task-text {
     color: #666;
 }
 
+.footer[hidden],
+.empty-state[hidden] { display: none; }
+
 #clearCompletedBtn {
     background: none;
     border: none;
     color: #764ba2;
     cursor: pointer;
     font-weight: 500;
+    text-align: right;
     transition: color 0.2s;
 }
 
 #clearCompletedBtn:hover { color: #dc3545; text-decoration: underline; }
+
+@media (max-width: 360px) {
+    .container { padding: 22px 18px; }
+    .footer { align-items: flex-start; flex-direction: column; }
+    #clearCompletedBtn { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
