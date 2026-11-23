@@ -33,7 +33,7 @@ Playwright currently contains **11 end-to-end scenarios**:
 | Accessibility | Accessible names and semantic label interaction |
 | Storage resilience | Recovery from malformed saved data |
 
-The last completed pre-accessibility baseline run passed 8 tests on 23 November 2026: [view baseline CI run](https://github.com/blvxx/playwright-qa-lab/actions/runs/45100286227). The updated 11-test run is triggered by the latest source changes; check [Actions](https://github.com/blvxx/playwright-qa-lab/actions) for its completed result.
+The latest verified GitHub Actions run passed **11/11 tests** on 23 November 2026: [view successful CI run](https://github.com/blvxx/playwright-qa-lab/actions/runs/45155393340).
 
 ## Manual QA evidence
 
