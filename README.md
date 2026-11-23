@@ -3,40 +3,50 @@
 [![Playwright](https://img.shields.io/badge/Playwright-UI%20Automation-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-A lightweight browser-based task tracker used as a QA portfolio project. The repository combines a small testable web app, documented manual scenarios, and end-to-end automation.
+A small browser-based task tracker used as a QA case study. The repository contains the application, automated regression checks, manual test design, a recorded execution report and resolved accessibility bug examples.
 
-## Application under test
+**[Live application](https://blvxx.github.io/playwright-qa-lab/)** · **[Latest CI runs](https://github.com/blvxx/playwright-qa-lab/actions)** · **[Manual test report](docs/test-execution-report.md)**
 
-- Create tasks with a button or Enter
-- Reject empty and whitespace-only input
-- Mark tasks as completed and update the active counter
-- Delete individual tasks
-- Clear completed tasks without removing active ones
-- Persist task data using browser localStorage
-- Display empty state when there are no tasks
+## Application behavior
+
+- Add tasks with the button or Enter.
+- Ignore empty and whitespace-only input.
+- Mark tasks complete and update the active counter.
+- Delete individual tasks and clear completed items.
+- Persist task state through browser `localStorage`.
+- Recover safely from malformed stored JSON.
+- Use native checkbox/label interaction and accessible names for icon-only controls.
+- Adapt to narrow mobile viewports and retain visible keyboard focus.
 
 ## Automated coverage
 
-Playwright scenarios cover:
+Playwright currently contains **11 end-to-end scenarios**:
 
-| Scenario | What is verified |
+| Area | Coverage |
 |---|---|
-| Initial state | Empty-state message and hidden footer |
-| Create task | Task appears, input clears, active counter updates |
-| Keyboard | Enter submits a task |
-| Validation | Empty and whitespace-only values are rejected |
-| Completion | Checkbox updates completed styling and active count |
-| Delete | Task removal and empty-state restoration |
-| Clear completed | Completed items removed, active items preserved |
-| Persistence | Task survives page reload |
+| Initial state | Empty state and footer visibility |
+| Creation | Button, Enter and input reset |
+| Validation | Empty and whitespace-only values |
+| Completion | Checkbox state and active counter |
+| Removal | Delete and clear-completed behavior |
+| Persistence | State after page reload |
+| Accessibility | Accessible names and semantic label interaction |
+| Storage resilience | Recovery from malformed saved data |
 
-**8 end-to-end scenarios** are authored in `tests/todo.spec.js`. The latest reviewed GitHub Actions run on 23 November 2026 completed with **8 passed**: [view the successful run](https://github.com/blvxx/playwright-qa-lab/actions/runs/45100286227). This is CI evidence, not a claim about a separate local execution.
+The last completed pre-accessibility baseline run passed 8 tests on 23 November 2026: [view baseline CI run](https://github.com/blvxx/playwright-qa-lab/actions/runs/45100286227). The updated 11-test run is triggered by the latest source changes; check [Actions](https://github.com/blvxx/playwright-qa-lab/actions) for its completed result.
 
-## Manual QA documentation
+## Manual QA evidence
 
-- [17 designed manual test cases](docs/test-cases.md) — execution status is currently **not executed**; the document is a test-design artifact.
-- [Test execution report template](docs/test-execution-report.md)
+The manual suite contains **20 planned cases** covering functional behavior, persistence, accessibility and corrupted storage.
+
+On 23 November 2026, an isolated Chromium session recorded **20/20 planned cases passed**, plus **1 exploratory 320px mobile-overflow check passed**. Synthetic task data was cleared after execution.
+
+- [Manual test cases](docs/test-cases.md)
+- [Test execution report and environment limitations](docs/test-execution-report.md)
+- [Resolved accessibility bug reports](docs/sample-bug-reports.md)
 - [Bug report template](docs/bug-report-template.md)
+
+**Test environment note:** the container's browser policy blocked navigation to local files and localhost. The isolated Chromium harness loaded the current HTML/JavaScript behavior directly and used a localStorage-compatible shim for reinitialisation checks. Native browser localStorage reload is also covered by the repository's automated Playwright CI suite. The report distinguishes these environments.
 
 ## Run locally
 
@@ -58,8 +68,6 @@ npm run test:report
 
 JavaScript · HTML · CSS · localStorage · Playwright · GitHub Actions
 
-## Project status
+## Project boundaries
 
-The application and eight automated browser scenarios are available for inspection. Check the [Actions history](https://github.com/blvxx/playwright-qa-lab/actions) for runs newer than the linked evidence above.
-
-Independent portfolio practice project. It is not a commercial client delivery.
+This is an independent portfolio practice project, not a commercial client delivery. It demonstrates test design, accessibility improvements, browser automation and reporting; it is not presented as a production task-management service.
