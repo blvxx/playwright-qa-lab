@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List | Vibe Coder Task</title>
-    <!-- Подключаем иконки FontAwesome -->
+    <meta name="theme-color" content="#667eea">
+    <title>To-Do List | Todo Test QA Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1><i class="fa-solid fa-list-check"></i> Мои задачи</h1>
-        
+    <main class="container">
+        <h1><i class="fa-solid fa-list-check" aria-hidden="true"></i> Мои задачи</h1>
+
         <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Что нужно сделать?">
-            <button id="addBtn"><i class="fa-solid fa-plus"></i></button>
+            <input type="text" id="taskInput" maxlength="160" placeholder="Что нужно сделать?"
+                   aria-label="Новая задача" autocomplete="off">
+            <button id="addBtn" type="button" aria-label="Добавить задачу">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            </button>
         </div>
 
-        <ul id="taskList"></ul>
+        <ul id="taskList" aria-label="Список задач"></ul>
 
-        <!-- Экран, если задач нет -->
-        <div id="emptyState" class="empty-state">
-            <i class="fa-regular fa-face-smile-wink"></i>
+        <div id="emptyState" class="empty-state" role="status" aria-live="polite">
+            <i class="fa-regular fa-face-smile-wink" aria-hidden="true"></i>
             <p>У вас пока нет задач. Самое время отдохнуть!</p>
         </div>
 
         <div class="footer" id="footer">
-            <span id="taskCount">0 задач</span>
-            <button id="clearCompletedBtn">Очистить выполненные</button>
+            <span id="taskCount" aria-live="polite">0 задач</span>
+            <button id="clearCompletedBtn" type="button">Очистить выполненные</button>
         </div>
-    </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
