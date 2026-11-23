@@ -30,7 +30,7 @@ Playwright scenarios cover:
 | Clear completed | Completed items removed, active items preserved |
 | Persistence | Task survives page reload |
 
-**8 end-to-end scenarios** are authored in `tests/todo.spec.js`. The latest reviewed GitHub Actions run on 22 November 2026 completed with **8 passed**: [view the successful run](https://github.com/blvxx/playwright-qa-lab/actions/runs/44979710284). This is CI evidence, not a claim about a separate local execution.
+**8 end-to-end scenarios** are authored in `tests/todo.spec.js`. The latest reviewed GitHub Actions run on 23 November 2026 completed with **8 passed**: [view the successful run](https://github.com/blvxx/playwright-qa-lab/actions/runs/45100286227). This is CI evidence, not a claim about a separate local execution.
 
 ## Manual QA documentation
 
