@@ -6,96 +6,107 @@ const footer = document.getElementById('footer');
 const taskCount = document.getElementById('taskCount');
 const clearCompletedBtn = document.getElementById('clearCompletedBtn');
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const STORAGE_KEY = 'tasks';
+
+function loadTasks() {
+    try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        if (!Array.isArray(stored)) return [];
+        return stored.filter(
+            (task) => task && typeof task.text === 'string' && typeof task.completed === 'boolean'
+        );
+    } catch {
+        return [];
+    }
+}
+
+let tasks = loadTasks();
 
 function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    } catch (error) {
+        console.error('Could not save tasks to local storage:', error);
+    }
 }
 
 function updateUI() {
-    taskList.innerHTML = '';
-    
-    // Проверка на пустой список
-    if (tasks.length === 0) {
-        emptyState.style.display = 'block';
-        footer.style.display = 'none';
-    } else {
-        emptyState.style.display = 'none';
-        footer.style.display = 'flex';
-    }
+    taskList.replaceChildren();
 
-    let activeTasks = 0;
+    const hasTasks = tasks.length > 0;
+    emptyState.hidden = hasTasks;
+    footer.hidden = !hasTasks;
 
     tasks.forEach((task, index) => {
-        if (!task.completed) activeTasks++;
+        const item = document.createElement('li');
+        if (task.completed) item.classList.add('completed');
 
-        const li = document.createElement('li');
-        if (task.completed) li.classList.add('completed');
-
-        const div = document.createElement('div');
-        div.className = 'task-content';
+        const label = document.createElement('label');
+        label.className = 'task-content';
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.id = `task-${index}`;
         checkbox.checked = task.completed;
-        checkbox.onclick = () => toggleTask(index);
+        checkbox.addEventListener('change', () => toggleTask(index));
 
-        const span = document.createElement('span');
-        span.className = 'task-text';
-        span.textContent = task.text;
-        // Клик по тексту тоже переключает статус
-        span.onclick = () => toggleTask(index);
+        const text = document.createElement('span');
+        text.className = 'task-text';
+        text.textContent = task.text;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'delete-btn';
-        deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>'; // Иконка корзины
-        deleteBtn.onclick = () => deleteTask(index);
+        label.append(checkbox, text);
 
-        div.appendChild(checkbox);
-        div.appendChild(span);
-        li.appendChild(div);
-        li.appendChild(deleteBtn);
-        
-        taskList.appendChild(li);
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-btn';
+        deleteButton.type = 'button';
+        deleteButton.setAttribute('aria-label', 'Удалить задачу');
+        deleteButton.title = 'Удалить задачу';
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash" aria-hidden="true"></i>';
+        deleteButton.addEventListener('click', () => deleteTask(index));
+
+        item.append(label, deleteButton);
+        taskList.appendChild(item);
     });
 
-    // Обновляем счетчик
+    const activeTasks = tasks.filter((task) => !task.completed).length;
     taskCount.textContent = `${activeTasks} активных`;
 }
 
 function addTask() {
     const text = taskInput.value.trim();
-    if (text) {
-        tasks.push({ text, completed: false });
-        taskInput.value = '';
-        saveTasks();
-        updateUI();
-    }
+    if (!text) return;
+
+    tasks.push({ text, completed: false });
+    taskInput.value = '';
+    saveTasks();
+    updateUI();
+    taskInput.focus();
 }
 
 function toggleTask(index) {
+    if (!tasks[index]) return;
     tasks[index].completed = !tasks[index].completed;
     saveTasks();
     updateUI();
 }
 
 function deleteTask(index) {
+    if (index < 0 || index >= tasks.length) return;
     tasks.splice(index, 1);
     saveTasks();
     updateUI();
 }
 
 function clearCompleted() {
-    tasks = tasks.filter(task => !task.completed);
+    tasks = tasks.filter((task) => !task.completed);
     saveTasks();
     updateUI();
 }
 
 addBtn.addEventListener('click', addTask);
-taskInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') addTask();
+taskInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') addTask();
 });
 clearCompletedBtn.addEventListener('click', clearCompleted);
 
-// Запуск при загрузке
 updateUI();
