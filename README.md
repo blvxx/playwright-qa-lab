@@ -5,7 +5,7 @@
 
 A small browser-based task tracker used as a QA case study. The repository contains the application, automated regression checks, manual test design, a recorded execution report and resolved accessibility bug examples.
 
-**[Live application](https://blvxx.github.io/playwright-qa-lab/)** · **[Latest CI runs](https://github.com/blvxx/playwright-qa-lab/actions)** · **[Manual test report](docs/test-execution-report.md)**
+**[Live application](https://blvxx.github.io/playwright-qa-lab/)** · **[Latest CI runs](https://github.com/blvxx/playwright-qa-lab/actions)** · **[Test execution report](docs/test-execution-report.md)**
 
 ## Application behavior
 
@@ -41,7 +41,7 @@ The manual suite contains **20 planned cases** covering functional behavior, per
 
 On 23 November 2026, an isolated Chromium session recorded **20/20 planned cases passed**, plus **1 exploratory 320px mobile-overflow check passed**. Synthetic task data was cleared after execution.
 
-- [Manual test cases](docs/test-cases.md)
+- [Manual test design](docs/test-cases.md)
 - [Test execution report and environment limitations](docs/test-execution-report.md)
 - [Resolved accessibility bug reports](docs/sample-bug-reports.md)
 - [Bug report template](docs/bug-report-template.md)
