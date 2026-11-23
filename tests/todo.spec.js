@@ -70,3 +70,27 @@ test('persists tasks after reload', async ({ page }) => {
   await page.reload();
   await expect(page.locator('#taskList')).toContainText('Persist me');
 });
+
+test('exposes accessible names for the input and icon-only controls', async ({ page }) => {
+  await expect(page.getByRole('textbox', { name: 'Новая задача' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Добавить задачу' })).toBeVisible();
+  await page.getByRole('textbox', { name: 'Новая задача' }).fill('Accessible task');
+  await page.getByRole('button', { name: 'Добавить задачу' }).click();
+  await expect(page.getByRole('button', { name: 'Удалить задачу' })).toBeVisible();
+});
+
+test('toggles a task when its associated label text is clicked', async ({ page }) => {
+  await page.locator('#taskInput').fill('Label toggles checkbox');
+  await page.locator('#addBtn').click();
+  const checkbox = page.locator('#taskList input[type=checkbox]');
+  await page.getByText('Label toggles checkbox').click();
+  await expect(checkbox).toBeChecked();
+  await expect(page.locator('#taskList li')).toHaveClass(/completed/);
+});
+
+test('recovers safely from malformed saved task data', async ({ page }) => {
+  await page.evaluate(() => localStorage.setItem('tasks', '{not-valid-json'));
+  await page.reload();
+  await expect(page.locator('#emptyState')).toBeVisible();
+  await expect(page.locator('#taskList li')).toHaveCount(0);
+});
