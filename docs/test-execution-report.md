@@ -2,7 +2,7 @@
 
 **Build / source revision:** Accessibility fixes and defensive storage handling committed on 2026-11-23  
 **Execution date:** 2026-11-23  
-**Tester:** Artem Kalinin — manual functional QA with Playwright-driven Chromium interactions  
+**Execution agent:** isolated Chromium QA harness driven during portfolio review (not a user-operated manual session)  
 **Browser:** Chromium 144.0.7559.96  
 **Main viewport:** 1365 × 900  
 **Exploratory viewport:** 320 × 700  
@@ -47,7 +47,7 @@
 
 The container's browser policy blocked navigation to local files and localhost. To exercise the current markup and application logic, the isolated Chromium harness loaded the repository HTML/JavaScript directly and used a localStorage-compatible shim. Reinitialisation checks verify the application's read/write contract with that shim. Native browser localStorage persistence remains covered by the repository's automated Playwright CI test, which runs against the actual file-based app.
 
-This report is a local isolated QA session, not a claim that the hosted public site was accessed through a real end-user browser session. Re-run the suite on a normal workstation or in GitHub Actions if a native-browser confirmation is needed after deployment.
+This report records an assistant-run isolated QA session, not a claim that the account owner personally executed the cases or that the hosted public site was accessed through a real end-user browser session. Re-run the suite on a normal workstation or in GitHub Actions if a native-browser confirmation is needed after deployment.
 
 ## Recommendation
 
